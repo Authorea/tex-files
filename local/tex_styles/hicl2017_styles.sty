@@ -1,0 +1,127 @@
+\ProvidesPackage{hicl2017_styles}
+
+%% KOMA-Options for the pages %%
+\KOMAoptions{
+abstract,						% Mit Abstract
+paper=a5,						% alle weiteren Papierformat einstellbar
+twoside=yes,
+headsepline,					% Trennline zum Seitenkopf	
+numbers=noenddot,
+fontsize=8pt
+}
+
+%% hacks %%
+\usepackage{scrhack}
+\usepackage{luaotfload}
+\usepackage{xifthen}
+
+%% Language and Input Settings %%
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\usepackage[strict=true,english=american]{csquotes}
+
+
+%% Packages that provide functionailties %%
+\usepackage{authblk}			% Author Affilation
+\usepackage{amsmath}			% Math input
+\usepackage{graphicx}			% Images
+\usepackage{listings}						%Listings
+
+\usepackage[hidelinks]{hyperref} 
+\hypersetup{pdfencoding=auto}
+
+
+%% Table packaets %%
+%http://www.tablesgenerator.com/
+%booktabs
+%Escape special TeX symbols (%, &, _, #, $)
+%Compress whitespace
+\usepackage{booktabs}
+\usepackage{multirow}
+\renewcommand{\arraystretch}{1.5}
+\usepackage{rotating} 
+
+%% Fonts %%
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures={TeX}}
+\setmainfont{SourceSansPro}
+\setsansfont{SourceSansPro-Light}
+\setmonofont{Alfios}
+\usepackage{microtype}
+
+
+
+%% Bibligography %%
+\usepackage[
+    backend=biber,
+    firstinits=true, % render first and middle names as initials
+    uniquename=init,
+    maxcitenames=3,
+    maxbibnames=99,
+    style=authoryear,
+    dashed=false, % re-print recurring author names in bibliography
+    natbib=true,
+    url=true, 
+    doi=true,
+    eprint=false
+]{biblatex}
+
+%% Display options %%
+\pagestyle{headings}			% lebender Kolumnentitel  
+\date{}
+\addtokomafont{title}{\raggedright}
+\addtokomafont{author}{\raggedright}
+\renewcommand\Authfont{\raggedright\scshape}
+\renewcommand\Affilfont{\raggedright\itshape\small}
+\clubpenalty = 10000
+\widowpenalty = 10000 \displaywidowpenalty = 10000
+
+
+% Define the versionDate and flogo commands
+\newcommand{\versionDate}{\footnotesize \textit{F1000Research} 2014 - DRAFT ARTICLE (PRE-SUBMISSION)}
+\newcommand{\flogo}{\includegraphics[height=12pt]{F1000header.png}}
+
+% Define the switch to turn on review mode (wide margins)
+\newboolean{reviewmode}
+\setboolean{reviewmode}{false} % set to true or false as required
+
+% Page setup for review and normal modes
+\ifthenelse{\boolean{reviewmode}}
+{\usepackage[colorinlistoftodos]{todonotes}}
+{\usepackage[disable]{todonotes}}
+\ifthenelse{\boolean{reviewmode}}
+{\usepackage[paperwidth=340mm,%
+            vmargin=2.2cm]%
+           {geometry}}
+{}
+
+\newcommand{\fancycomment}[2][]{%
+\refstepcounter{mycomment}%
+{%
+\setstretch{0.7}% spacing
+\todo[color=orange!40,size=\small,fancyline]{%
+\textbf{Comment [\uppercase{#1}\themycomment]:}#2}%
+}}
+
+\newcommand{\figurecomment}[2][]{%
+\refstepcounter{mycomment}%
+{%
+\setstretch{0.7}% spacing
+\todo[color=orange!40,size=\small,inline]{%
+\textbf{Comment [\uppercase{#1}\themycomment]:}#2}%
+}}
+
+
+
+
+%% tikz Packages %%
+\usepackage{tikz}
+\usetikzlibrary{spy,intersections,shapes.arrows,calc}
+\usepackage{tikzscale}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.6}
+\usepackage{graphicx} %%Zum Laden von Grafiken
+\usepackage[justification=raggedright]{subcaption} %%Teilabbildungen in einer Abbildung
+\usepackage[justification=raggedright]{caption}
+\usepackage{float}
+\usepackage{pdfpages} % %Ganzseitige pdfs
